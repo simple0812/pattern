@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+</body>
+<script>
+	function normal(arg) {
+		switch(arg) {
+			case 'foo': console.log('foo'); break;
+			case 'bar': console.log('bar'); break;
+			case 'baz': console.log('baz'); break;
+			default: break;
+		}
+	}
+	
+	function context(arg) {
+		strategy[arg]();
+	}
+	
+	var strategy = {
+		foo : function() {
+			console.log('foo');
+		},
+		bar : function() {
+			console.log('bar');
+		},
+		baz : function() {
+			console.log('baz');
+		}
+	}
+	
+	normal('foo');
+	context('bar');
+	
+</script>
+
+</html>
