@@ -10,6 +10,7 @@
 	/*定义接口
 	function Component() {
 		string name
+		int status 
 		int createdAt
 		int updatedAt
 
@@ -23,6 +24,7 @@
 	function Leaf(name) {
 		this.name = name;
 		this.content='';
+		this.status = 1; //是否删除
 		this.createdAt = new Date().getTime();
 		this.updatedAt = new Date().getTime();
 	}
@@ -33,8 +35,12 @@
 	}
 
 	Leaf.prototype.remove = function() {
+		if(this.status == 0) return;
+		
 		this.content = '';
 		this.updatedAt = new Date().getTime();
+		this.status = 0;
+		console.log(this.name + "删除成功");
 	}
 
 	Leaf.prototype.get = function() {
@@ -45,6 +51,7 @@
 	function Composite(name) {
 		this.name = name;
 		this.content = [];
+		this.status = 1;
 		this.createdAt = new Date().getTime();
 		this.updatedAt = new Date().getTime();
 	}
@@ -55,10 +62,21 @@
 	}
 
 	Composite.prototype.remove = function(componentName) {
-		this.content = _.reject(this.content, function(item) {
-			return item.name = componentName
-		})
+		if(this.status == 0) return;
+
+		var p = _.filter(this.content, function(item) {
+				return componentName ? item.status == 1 && item.name == componentName : item.status == 1;
+			})
+
+		if(p && p.length) {
+			p.forEach(function(item) {
+				item.remove();
+			})
+		}
+
 		this.updatedAt = new Date().getTime();
+		this.status = 0;
+		console.log(this.name + "删除成功");
 	}
 
 	Composite.prototype.get = function(componentName) {
@@ -74,13 +92,12 @@
 	var root = new Composite('root')
 	var dir1 = new Composite('dir1');
 	var txt = new Leaf('txt');
-	txt.add('txt')
 
+	txt.add('txt')
 	root.add(dir1);
 	root.add(txt);
-	dir1.add(txt);
-
 	txt.add('aaa')
 
+	root.remove();
 	console.log(root)
 </script>

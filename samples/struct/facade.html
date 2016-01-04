@@ -33,43 +33,48 @@ var kfc = {
 		return "玉米";
 	},
 
-	//外观模式
+	
+}
+
+//外观模式
+var mealFacade = {
 	/*
 	全家桶:3份鸡翅 2份牛肉汉堡 2份薯条 4份可乐
 	*/
 	quanJiaTong: function() {
-		var ret = '';
-		ret += this.createJiChi();
-		ret += this.createJiChi();
-		ret += this.createJiChi();
-		ret += this.createNiuRouHanBao();
-		ret += this.createNiuRouHanBao();
-		ret += this.createShuTiao();
-		ret += this.createShuTiao();
-		ret += this.createKeLe();
-		ret += this.createKeLe();
-		ret += this.createKeLe();
-		ret += this.createKeLe();
-		return ret;
+		var ret = [];
+		ret.push(kfc.createJiChi());
+		ret.push(kfc.createJiChi());
+		ret.push(kfc.createJiChi());
+		ret.push(kfc.createNiuRouHanBao());
+		ret.push(kfc.createNiuRouHanBao());
+		ret.push(kfc.createShuTiao());
+		ret.push(kfc.createShuTiao());
+		ret.push(kfc.createKeLe());
+		ret.push(kfc.createKeLe());
+		ret.push(kfc.createKeLe());
+		ret.push(kfc.createKeLe());
+		
+		return ret.join(',');
 	},
 
 	/*
 	套餐1:1份鸡翅 1份牛肉汉堡 1份薯条 1份可乐
 	*/
 	mealOne: function() {
-		var ret = '';
-		ret += this.createJiChi();
-		ret += this.createNiuRouHanBao();
-		ret += this.createShuTiao();
-		ret += this.createKeLe();
+		var ret = [];
+		ret.push(kfc.createJiChi());
+		ret.push(kfc.createNiuRouHanBao());
+		ret.push(kfc.createShuTiao());
+		ret.push(kfc.createKeLe());
 
-		return ret;
+		return ret.join(',');
 	}
 }
 
 /******************************client*********************************/
-var quanJiaTong = kfc.quanJiaTong();
-var mealOne = kfc.mealOne();
+var quanJiaTong = mealFacade.quanJiaTong();
+var mealOne = mealFacade.mealOne();
 
 $('#info').append(quanJiaTong + '<br/>');
 $('#info').append(mealOne + '<br/>');
