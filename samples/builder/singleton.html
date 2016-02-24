@@ -43,7 +43,6 @@
 	}
 
 	var phonex = (function(window) {
-		var instance = null;
 		function Constructor() {
 			this.brand = "microsoft";
 			this.os="windows";
@@ -62,19 +61,20 @@
 			return p;
 		}
 
-		// return instance || (instance = new Constructor());
 		return new Constructor();
 	})(window)
 
 	//这个不是单例的
 	function Phonex() {
+		var instance = null;
 		function Phonex() {
 			this.brand = "microsoft";
 			this.os="windows";
 			this.size="5.2";
 			this.screenResolution="2k";
 		}
-		return new Phonex()
+
+		return instance || (instance = new Phonex());
 	}
 
 

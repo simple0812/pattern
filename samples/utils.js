@@ -1,25 +1,29 @@
 var utils = (function() {
-    function deepCopy(source) {
+    function deepClone(source) {
         if (typeof source !== 'object') {
-            return source
+            return source;
         }
 
-        if (Object.prototype.toString.call(source) == '[object Date]') {
-            return new Date(source.getTime())
-        } else if (Object.prototype.toString.call(source[key]) == '[object Array]') {
-            return source[key].slice(0)
+        if (Object.prototype.toString.call(source) === '[object Null]') {
+            return null;
+        } else if (Object.prototype.toString.call(source) === '[object Date]') {
+            return new Date(source.getTime());
+        } else if (Object.prototype.toString.call(source) === '[object Array]') {
+            return source.slice(0);
         }
 
-        var result = new source.constructor;
+        var result = new source.constructor();
 
         for (var key in source) {
             if (typeof source[key] === 'object') {
-                if (Object.prototype.toString.call(source[key]) == '[object Date]') {
-                    result[key] =new Date(source[key].getTime()) 
-                } else if (Object.prototype.toString.call(source[key]) == '[object Array]') {
-                    result[key] = source[key].slice(0)
+                if (Object.prototype.toString.call(source[key]) === '[object Date]') {
+                    result[key] = new Date(source[key].getTime());
+                } else if (Object.prototype.toString.call(source[key]) === '[object Array]') {
+                    result[key] = source[key].slice(0);
+                } else if (Object.prototype.toString.call(source[key]) === '[object Null]') {
+                    result[key] = null;
                 } else {
-                    result[key] = deepCopy(source[key]);
+                    result[key] = deepClone(source[key]);
                 }
             } else {
                 result[key] = source[key];
@@ -54,7 +58,7 @@ var utils = (function() {
     }
 
     return {
-        deepCopy: deepCopy,
+        deepCopy: deepClone,
         extend: extend,
         format: format
     }
