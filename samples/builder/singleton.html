@@ -66,7 +66,6 @@
 
 	//这个不是单例的
 	function Phonex() {
-		var instance = null;
 		function Phonex() {
 			this.brand = "microsoft";
 			this.os="windows";
@@ -74,7 +73,7 @@
 			this.screenResolution="2k";
 		}
 
-		return instance || (instance = new Phonex());
+		return new Phonex();
 	}
 
 
@@ -85,5 +84,5 @@
 	$('#info').append(phone.description());
 	$('#info').append(phonex.description());
 
-	console.log( Phonex()==  Phonex())
+	console.log( new Phonex() == new Phonex())
 </script>

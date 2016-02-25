@@ -49,7 +49,7 @@ var utils = (function() {
             return null;
 
         var str = arguments[0];
-        for (var i = 1; i < arguments.length; i++) {
+        for (var i = 1; i < arguments.length; i++) { 
             var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
             str = str.replace(re, arguments[i]);
         }
