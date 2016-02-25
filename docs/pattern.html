@@ -1094,10 +1094,10 @@ var obj = concreteFactory.create();
 <li>虚拟代理（Virtual Proxy）根据需要创建开销很大的对象。如果需要创建一个资源消耗较大的对象，先创建一个消耗相对较小的对象来表示，真实对象只在需要时才会被真正创建。</li>
 <li>保护代理（Protection Proxy）控制对原始对象的访问。保护代理用于对象应该有不同的访问权限的时候。</li>
 <li>智能指引（Smart Reference）取代了简单的指针，它在访问对象时执行一些附加操作。</li>
-<li>Copy-on-Write代理：它是虚拟代理的一种，把复制（克隆）操作延迟到只有在客户端真正需要时才执行。一般来说，对象的深克隆是一个开销较大的操作，Copy-onWrite代理可以让这个操作延迟，只有对象被用到的时候才被克隆。<br />
-<img alt="代理模式" src="///E://git_projects/pattern/images/struct/proxy.png" title="代理模式" /></li>
+<li>Copy-on-Write代理：它是虚拟代理的一种，把复制（克隆）操作延迟到只有在客户端真正需要时才执行。一般来说，对象的深克隆是一个开销较大的操作，Copy-onWrite代理可以让这个操作延迟，只有对象被用到的时候才被克隆。</li>
 </ul>
 </blockquote>
+<p><img alt="代理模式" src="///E://git_projects/pattern/images/struct/proxy.png" title="代理模式" /></p>
 <h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>行为型</h2>
 <blockquote>
 <p>行为型模式涉及到算法和对象间的职责分配，不仅描述对象或类的模式，还描述它们之间的通信方式，刻划了运行时难以跟踪的复杂的控制流，它们将你的注意力从控制流转移到对象间的关系上来。</p>
