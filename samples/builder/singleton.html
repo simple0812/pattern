@@ -43,6 +43,7 @@
 	}
 
 	var phonex = (function(window) {
+		var instance = null;
 		function Constructor() {
 			this.brand = "microsoft";
 			this.os="windows";
@@ -61,20 +62,33 @@
 			return p;
 		}
 
-		return new Constructor();
+		return {
+			getInstance : function() {
+				if(instance) return instance;
+				return new Constructor();
+			}
+		}
 	})(window)
 
-	//这个不是单例的
-	function Phonex() {
-		function Phonex() {
-			this.brand = "microsoft";
+	var Phonex = (function() {
+
+	    var instance = null;
+
+	     function Phonex () {
+	        if (instance) {
+	            return instance;
+	        }
+
+	        instance = this;
+
+	        this.brand = "microsoft";
 			this.os="windows";
 			this.size="5.2";
 			this.screenResolution="2k";
-		}
+	    };
 
-		return new Phonex();
-	}
+	    return Phonex
+	})();
 
 
 /******************************client*********************************/
@@ -82,7 +96,7 @@
 	
 	$('#info').append(p.description());
 	$('#info').append(phone.description());
-	$('#info').append(phonex.description());
+	$('#info').append(phonex.getInstance().description());
+	console.log(new Phonex() == new Phonex(), new Phonex())
 
-	console.log( new Phonex() == new Phonex())
 </script>
