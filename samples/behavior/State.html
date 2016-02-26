@@ -3,7 +3,7 @@
 <body>
 </body>
 <script>
-	var liftState = {
+	var LIFT_STATE_ENUM = {
 		opening : 1,
 		running : 2,
 		stopping : 3,
@@ -11,7 +11,7 @@
 	}
 	
 	function Lift() {
-		this.state = liftState.closing;
+		this.state = LIFT_STATE_ENUM.closing;
 	}
 	
 	Lift.prototype.setState = function(state) {
@@ -24,18 +24,18 @@
 	
 	Lift.prototype.open = function() {
 		switch(this.state) {
-			case liftState.opening :
+			case LIFT_STATE_ENUM.opening :
 				break;
-			case liftState.running :
+			case LIFT_STATE_ENUM.running :
 				console.log('lift is running can not open');
 				break;
-			case liftState.stopping :
+			case LIFT_STATE_ENUM.stopping :
 				console.log('lift open success')
-				this.setState(liftState.opening);
+				this.setState(LIFT_STATE_ENUM.opening);
 				break;
-			case liftState.closing :
+			case LIFT_STATE_ENUM.closing :
 				console.log('lift open success')
-				this.setState(liftState.opening);
+				this.setState(LIFT_STATE_ENUM.opening);
 				break;
 			default :
 				break;
@@ -44,18 +44,18 @@
 	
 	Lift.prototype.close = function() {
 		switch(this.state) {
-			case liftState.opening :
+			case LIFT_STATE_ENUM.opening :
 				console.log('lift close success')
-				this.setState(liftState.closing);
+				this.setState(LIFT_STATE_ENUM.closing);
 				break;
-			case liftState.running :
+			case LIFT_STATE_ENUM.running :
 				console.log('lift is running can not clsoe')
 				break;
-			case liftState.stopping :
+			case LIFT_STATE_ENUM.stopping :
 				console.log('lift close success')
-				this.setState(liftState.closing);
+				this.setState(LIFT_STATE_ENUM.closing);
 				break;
-			case liftState.closing :
+			case LIFT_STATE_ENUM.closing :
 				break;
 			default :
 				break;
@@ -64,18 +64,18 @@
 	
 	Lift.prototype.run = function() {
 		switch(this.state) {
-			case liftState.opening :
+			case LIFT_STATE_ENUM.opening :
 				console.log('lift is running can not run')
 				break;
-			case liftState.running :
+			case LIFT_STATE_ENUM.running :
 				break;
-			case liftState.stopping :
+			case LIFT_STATE_ENUM.stopping :
 				console.log('lift run success')
-				this.setState(liftState.running);
+				this.setState(LIFT_STATE_ENUM.running);
 				break;
-			case liftState.closing :
+			case LIFT_STATE_ENUM.closing :
 				console.log('lift run success')
-				this.setState(liftState.running);
+				this.setState(LIFT_STATE_ENUM.running);
 				break;
 			default :
 				break;
@@ -84,15 +84,15 @@
 	
 	Lift.prototype.stop = function() {
 		switch(this.state) {
-			case liftState.opening :
+			case LIFT_STATE_ENUM.opening :
 				break;
-			case liftState.running :
+			case LIFT_STATE_ENUM.running :
 				console.log('lift stop success')
-				this.setState(liftState.stopping);
+				this.setState(LIFT_STATE_ENUM.stopping);
 				break;
-			case liftState.stopping :
+			case LIFT_STATE_ENUM.stopping :
 				break;
-			case liftState.closing :
+			case LIFT_STATE_ENUM.closing :
 				break;
 			default :
 				break;
@@ -104,6 +104,7 @@
 	lift.close();
 	lift.run();
 	lift.stop();
+	console.log('/*============================================================================*/')
 	
 	/*============================================================================*/
 
@@ -111,16 +112,16 @@
 		this.state = null;
 		this.setState = function(state) {
 			switch(state) {
-				case liftState.opening :
+				case LIFT_STATE_ENUM.opening :
 					this.state = new OpeningState(this);
 					break;
-				case liftState.closing :
+				case LIFT_STATE_ENUM.closing :
 					this.state = new ClosingState(this);
 					break;
-				case liftState.running :
+				case LIFT_STATE_ENUM.running :
 					this.state = new RunningState(this);
 					break;
-				case liftState.stopping :
+				case LIFT_STATE_ENUM.stopping :
 					this.state = new StoppingState(this);
 					break;
 				default :
@@ -159,7 +160,7 @@
 		
 		this.close = function() {
 			console.log('lift open success')
-			this.context.setState(liftState.closing);
+			this.context.setState(LIFT_STATE_ENUM.closing);
 		}
 		
 		this.run = function() {
@@ -168,7 +169,7 @@
 		
 		this.stop = function() {
 			console.log('lift open success')
-			this.context.setState(liftState.stopping);
+			this.context.setState(LIFT_STATE_ENUM.stopping);
 		}
 	}
 	
@@ -177,7 +178,7 @@
 		
 		this.open = function() {
 			console.log('lift close success')
-			this.context.setState(liftState.opening);
+			this.context.setState(LIFT_STATE_ENUM.opening);
 		}
 		
 		this.close = function() {
@@ -190,7 +191,7 @@
 		
 		this.stop = function() {
 			console.log('lift close success')
-			this.context.setState(liftState.stopping);
+			this.context.setState(LIFT_STATE_ENUM.stopping);
 		}
 	}
 	
@@ -211,7 +212,7 @@
 		
 		this.stop = function() {
 			console.log('lift stop success')
-			this.context.setState(liftState.stopping);
+			this.context.setState(LIFT_STATE_ENUM.stopping);
 		}
 	}
 	
@@ -220,17 +221,17 @@
 		
 		this.open = function() {
 			console.log('lift open  success')
-			this.context.setState(liftState.opening);
+			this.context.setState(LIFT_STATE_ENUM.opening);
 		}
 		
 		this.close = function() {
 			console.log('lift close  success')
-			this.context.setState(liftState.closing);
+			this.context.setState(LIFT_STATE_ENUM.closing);
 		}
 		
 		this.run = function() {
 			console.log('lift run  success')
-			this.context.setState(liftState.running);
+			this.context.setState(LIFT_STATE_ENUM.running);
 		}
 		
 		this.stop = function() {
@@ -239,7 +240,7 @@
 	}
 	
 	var context = new Context();
-	context.setState(liftState.closing);
+	context.setState(LIFT_STATE_ENUM.closing);
 	context.open();
 	context.close();
 	context.run();

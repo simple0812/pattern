@@ -47,16 +47,16 @@
 		function Visitor() {
 			this.visit = function(element) {
 				console.log('element 相同的有的操作');
-				if(element.constructor == ElementA) visistA(element)
-				else if(element.constructor == ElementB) visistB(element);
+				if(element.constructor == ElementA) visitA(element)
+				else if(element.constructor == ElementB) visitB(element);
 			}
 			
-			function visistA(element) {
+			function visitA(element) {
 				console.log('...a....')
 				element.show();
 			}
 			
-			function visistB(element) {
+			function visitB(element) {
 				console.log('...b....')
 				element.show();
 			}
