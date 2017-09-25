@@ -1,3 +1,18 @@
+
+(function(){
+    var _console = console.log;
+    console.log = (function() {
+        if(!arguments.length) return;
+        var ret = Array.prototype.slice.call(arguments,0)
+            .map(each => Object.prototype.toString.call(each) == '[object Object]' ? JSON.stringify(each) : each)
+            .join(',');
+
+        document.getElementById('consoleDiv').innerHTML += ret + '<br/>';
+        _console(ret);
+    }).bind(console)
+})()
+
+
 var utils = (function() {
     function deepClone(source) {
         if (typeof source !== 'object') {

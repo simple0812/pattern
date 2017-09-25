@@ -5,9 +5,10 @@
 桥接模式：
 将抽象部分与实现部分分离，使它们都可以独立的变化。减少因变化带来的代码的修改量。<br/>
 使用继承会导致类型爆炸
-实例：文字的颜色
+实例：文字的颜色和字体大小
 </div>
 <div id='info'></div>
+<div id='consoleDiv'></div>
 <script>
 // 	function Font(txt){
 // 		this.txt = txt;
@@ -45,11 +46,12 @@
 
 
 
-	function Font(txt, color){
+	function Font(txt, color, fontSize){
 		this.txt = txt;
 		this.color = color || new Color('black');
+		this.fontSize = fontSize || 10;
 		this.render = function() {
-			return '<p style="color:'+ this.color.color +'">' + this.txt + '</p>'
+			return `<p style="color:${this.color.color};font-size:${this.fontSize.size}">${this.txt}</p>`
 		}
 	}
 
@@ -57,12 +59,17 @@
 		this.color = color;
 	}
 
+	function FontSize(size) {
+		this.size = size;
+	}
+
 
 /******************************client*********************************/
 	var red = new Color('red');
 	var blue = new Color('blue');
+	var size20 = new FontSize(40);
 	$('#info').append(new Font('aaaa').render());
-	$('#info').append(new Font('aaaa', red).render());
-	$('#info').append(new Font('aaaa', blue).render());
+	$('#info').append(new Font('aaaa', red, size20).render());
+	$('#info').append(new Font('aaaa', blue, size20).render());
 
 </script>
