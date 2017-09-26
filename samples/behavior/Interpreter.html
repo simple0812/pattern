@@ -1,13 +1,73 @@
-<script src='../jquery.js'></script>
-<script src='../utils.js'></script>
-<meta charset="utf-8" />
-<div>
-迭代器模式
-提供一种方法顺序访问一个聚合对象中的各种元素，而又不暴露该对象的内部表示<br/>
-示例:
-</div>
-<div id='info'></div>
-<div id='consoleDiv'></div>
-<script>
-	alert('太难，看不懂....')
-</script>
+<html>
+	<head>
+		<script src='../jquery.js'></script>
+		<script src='../utils.js'></script>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div>
+		迭代器模式
+		提供一种方法顺序访问一个聚合对象中的各种元素，而又不暴露该对象的内部表示<br/>
+		示例:音乐播放 a123456,b654321,
+		</div>
+		<div>欢乐颂简谱</div>
+		<div id='info'>a3345 5432 1123 322 3345543211232112231234312343212533345543421123211</div>
+		<div id='consoleDiv'></div>
+		<script>
+			window.AudioContext = window.AudioContext || window.webkitAudioContext;
+				var audioCtx = new AudioContext();
+			
+
+			function playx(value, len=1) {
+				console.log(value, len);
+				var oscillator = audioCtx.createOscillator();
+				var gainNode = audioCtx.createGain();
+				oscillator.connect(gainNode);
+				gainNode.connect(audioCtx.destination);
+				oscillator.type = 'square'; //sine //triangle //sawtooth //square
+				oscillator.frequency.value = value;
+				gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+				gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01);
+				oscillator.start(audioCtx.currentTime);
+				gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + len);
+				oscillator.stop(audioCtx.currentTime + len);
+			}
+
+			var arrx = [196.00, 220.00, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
+			var arr = [ 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
+			
+		    var Gamut = 'a';
+		    function context() {
+		    	var txt = document.getElementById('info').innerHTML;
+		    	console.log(txt)
+		    	var Gamut = 'a';
+
+		    	play(txt.split('|')[0])
+		    }
+
+		    context();
+
+		    function play(str) {
+		    	if(!str.length) return;
+		    	if(!isChar(str[0])) return;
+		    	Gamut = str[0];
+		    	str = str.slice(1);
+		    
+		    	var index = 0;
+		    	setInterval(function() {
+		    		if(index >= str.length) return;
+		    		if(str[index] !== " ") 
+		    			playx(arr[str[index]], 1.6)
+					index ++;
+		    	}, 500);
+		    }
+
+		    function isChar(char) {
+		    	var reg = /^[a-z]$/ig;
+		    	return reg.test(char);
+		    }
+
+		</script>
+	</body>
+</html>
+

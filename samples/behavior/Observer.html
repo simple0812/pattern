@@ -76,6 +76,7 @@
 
 	var Teacher = {
 		lookOver : function() {
+			console.log('老师开始巡视................................')
 			STUDENTS.forEach(function(item) {
 				if(item.status == STATUS_IN_CLASS.study) {
 					console.log(item.name +'在' + item.status +' ,前途无量啊')
@@ -91,6 +92,7 @@
 	}
 
 	/******************************client*********************************/
+	console.log('没人监视老师................................')
 	var zl =getByName('zl');
 	zl.setStatus(STATUS_IN_CLASS.study);
 	var lilei = getByName('lilei')

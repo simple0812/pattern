@@ -11,13 +11,15 @@
 <script>
 	/*定义接口
 	function Component() {
+		string id
+		string parentId
 		string name
 		int status 
 		int createdAt
 		int updatedAt
 
-	 	void add() 
-	 	void remove() 
+	 	void appendChild() 
+	 	void removeChild() 
 		Component[] get() 
 	}
 
@@ -25,18 +27,19 @@
 	//实现Component接口
 	function Leaf(name) {
 		this.name = name;
+		this.id = Math.random().toString().slice(-9);//模拟guid
 		this.content='';
 		this.status = 1; //是否删除
 		this.createdAt = new Date().getTime();
 		this.updatedAt = new Date().getTime();
 	}
 
-	Leaf.prototype.add = function(str) {
+	Leaf.prototype.appendChild = function(str) {
 		this.content += str;
 		this.updatedAt = new Date().getTime();
 	}
 
-	Leaf.prototype.remove = function() {
+	Leaf.prototype.removeChild = function() {
 		if(this.status == 0) return;
 		
 		this.content = '';
@@ -52,29 +55,23 @@
 	//实现Component接口
 	function Composite(name) {
 		this.name = name;
+		this.id = Math.random().toString().slice(-9);//模拟guid
 		this.content = [];
 		this.status = 1;
 		this.createdAt = new Date().getTime();
 		this.updatedAt = new Date().getTime();
 	}
 
-	Composite.prototype.add = function(component) {
+	Composite.prototype.appendChild = function(component) {
 		this.content.push(component);
+		component.parentId = this.id;
 		this.updatedAt = new Date().getTime();
 	}
 
-	Composite.prototype.remove = function(componentName) {
+	Composite.prototype.removeChild = function() {
 		if(this.status == 0) return;
 
-		var p = _.filter(this.content, function(item) {
-				return componentName ? item.status == 1 && item.name == componentName : item.status == 1;
-			})
-
-		if(p && p.length) {
-			p.forEach(function(item) {
-				item.remove();
-			})
-		}
+		this.content.length = 0;
 
 		this.updatedAt = new Date().getTime();
 		this.status = 0;
@@ -95,11 +92,16 @@
 	var dir1 = new Composite('dir1');
 	var txt = new Leaf('txt');
 
-	txt.add('txt')
-	root.add(dir1);
-	root.add(txt);
-	txt.add('aaa')
+	txt.appendChild('txt')
+	root.appendChild(dir1);
+	root.appendChild(txt);
+	dir1.appendChild(txt);
+	txt.appendChild('aaa')
+	console.log(root)
 
-	root.remove();
+	dir1.removeChild();
+	console.log(root)
+
+	root.removeChild();
 	console.log(root)
 </script>
