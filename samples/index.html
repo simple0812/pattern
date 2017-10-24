@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<style type="text/css">
+			.left {width: 10%; float: left;}
+			.left span {color: blue;}
+			.left div a {display: block; text-indent: 15px; cursor: pointer;}
+			.right {float: left; width: 90%;}
+			iframe {width: 100%; height: 100%; border: none;}
+			li {list-style: none;}
+		</style>
+	</head>
+	<body>
+		<div class='left'>
+			<span>builder</span>
+			<div>
+				<a src='builder/abstractFactory.html' onclick="navi(this)">abstractFactory</a>
+				<a src='builder/builder.html' onclick="navi(this)">builder</a>
+				<a src='builder/factoryMethod.html' onclick="navi(this)">factoryMethod</a>
+				<a src='builder/prototype.html' onclick="navi(this)">prototype</a>
+				<a src='builder/simpleMethod.html' onclick="navi(this)">simpleMethod</a>
+				<a src='builder/singleton.html' onclick="navi(this)">singleton</a>
+			</div>
+			<span>struct</span>
+			<div>
+				<a src='struct/adapter.html' onclick="navi(this)">adapter</a>
+				<a src='struct/bridge.html' onclick="navi(this)">bridge</a>
+				<a src='struct/composite.html' onclick="navi(this)">composite</a>
+				<a src='struct/decorator.html' onclick="navi(this)">decorator</a>
+				<a src='struct/facade.html' onclick="navi(this)">facade</a>
+				<a src='struct/flyweight.html' onclick="navi(this)">flyweight</a>
+				<a src='struct/proxy.html' onclick="navi(this)">proxy</a>
+			</div>
+			<span>behavior</span>
+			<div>
+				<a src='behavior/Command.html' onclick="navi(this)">Command</a>
+				<a src='behavior/Interpreter.html' onclick="navi(this)">Interpreter</a>
+				<a src='behavior/Iterator.html' onclick="navi(this)">Iterator</a>
+				<a src='behavior/mediator.html' onclick="navi(this)">mediator</a>
+				<a src='behavior/Memento.html' onclick="navi(this)">Memento</a>
+				<a src='behavior/Observer.html' onclick="navi(this)">Observer</a>
+				<a src='behavior/Responsibility.html' onclick="navi(this)">Responsibility</a>
+				<a src='behavior/State.html' onclick="navi(this)">State</a>
+				<a src='behavior/Strategy.html' onclick="navi(this)">Strategy</a>
+				<a src='behavior/TemplateMethod.html' onclick="navi(this)">TemplateMethod</a>
+				<a src='behavior/Visitor.html' onclick="navi(this)">Visitor</a>
+			</div>
+			
+		</div>
+		<div class='right' id="right">
+				<iframe id='xFrame' src="struct/adapter.html"></iframe>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function navi(obj) {
+			xFrame.src = obj.getAttribute('src')
+			right.height = xFrame.height;
+		}
+	</script>
+</html>
